@@ -1,0 +1,7 @@
+.woocommerce-MyAccount-navigation ul li a[href*="add-product"]::before {
+  content: "\f067";
+}
+
+.woocommerce-MyAccount-navigation ul li a[href*="my-products"]::before {
+  content: "\f03a";
+}
