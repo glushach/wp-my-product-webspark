@@ -1,7 +1,13 @@
 <?php
 
 function custom_register_endpoints_pages() {
-  if (!get_page_by_title('Add Product')) {
+  $query = new WP_Query(array(
+    'post_type'      => 'page',
+    'name'           => 'add-product',
+    'posts_per_page' => 1,
+  ));
+
+  if (!$query->have_posts()) {
       $page_id = wp_insert_post(array(
           'post_title'   => 'Add Product',
           'post_content' => 'Here you can add your products.',
@@ -11,7 +17,13 @@ function custom_register_endpoints_pages() {
       update_option('woocommerce_add_product_page', $page_id);
   }
 
-  if (!get_page_by_title('My Products')) {
+  $query = new WP_Query(array(
+    'post_type'      => 'page',
+    'name'           => 'my-products',
+    'posts_per_page' => 1,
+  ));
+
+  if (!$query->have_posts()) {
       $page_id = wp_insert_post(array(
           'post_title'   => 'My Products',
           'post_content' => 'List of your products.',
@@ -55,4 +67,3 @@ function custom_my_products_content() {
   echo '<p>' . __('List of your products.', 'textdomain') . '</p>';
 }
 add_action('woocommerce_account_my-products_endpoint', 'custom_my_products_content');
-
